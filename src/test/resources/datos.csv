@@ -1,0 +1,3 @@
+Origen,Destino,Precio_Ida,Precio_Vuelta,Nombre,Apellido,Fecha_Nacimiento,Documento,Email,Telefono,Tarjeta,Nombre_Apellido,Expiracion,CVV
+Pasto,PSO - Colombia,Bogotá,BOG - Colombia,300000,250000,Test,Example,12-02-1970,12727272712,test@gmail.com,3214235652,3783737637636767,Home Test,0230,234
+Medellín,MDE - Colombia,Cartagena,CTG - Colombia,400000,350000,John,Doe,01-01-1980,123456789,test@example.com,3219876543,3783737637631111,Jane Doe,0525,567
