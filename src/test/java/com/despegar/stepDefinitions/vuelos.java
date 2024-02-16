@@ -70,7 +70,7 @@ public class vuelos {
     @And("elegir asientos random")
     public void elegirAsientosRandom() {
         System.out.println("lsos");
-        vuelosDespegar.seats();
+        vuelosDespegar.selectSeats();
     }
 
     @And("elegir equipaje")
@@ -85,10 +85,6 @@ public class vuelos {
         vuelosDespegar.informationPasenger(nombre,apellido,fecha,documento,email,telefono);
     }
 
-    @And("pago con tarjeta de credito # tarjeta {string}, nombre y apellido {string},expiracion {string} y CVV {string}")
-    public void pagoConTarjetaDeCreditoTarjetaNombreYApellidoExpiracionYCVV(String numberCard, String nameAndLast, String expiration, String cvv) {
-    vuelosDespegar.paymetCard(numberCard,nameAndLast,expiration,cvv);
-    }
 
     @And("Realizo el proceso de un vuelo hasta el pago")
     public void procesoVuelo(List<Vuelo> vuelos) {
@@ -96,54 +92,20 @@ public class vuelos {
             System.out.println(vuelo);
         }
     }
-    @Before("@cargaDatosCSV")
-    public void cargarDatosDesdeCSV() throws Exception {
-        Reader reader = new FileReader("src/test/resources/datos.csv");
-        CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT.withFirstRecordAsHeader());
-        for (CSVRecord record : csvParser) {
-            Vuelo vuelo = new Vuelo(
-                    record.get("Origen"),
-                    record.get("Destino"),
-                    Double.parseDouble(record.get("Precio_Ida")),
-                    Double.parseDouble(record.get("Precio_Vuelta"))
-//                    record.get("Nombre"),
-//                    record.get("Apellido"),
-//                    record.get("Fecha_Nacimiento"),
-//                    record.get("Documento"),
-//                    record.get("Email"),
-//                    record.get("Telefono"),
-//                    record.get("Tarjeta"),
-//                    record.get("Nombre_Apellido"),
-//                    record.get("Expiracion"),
-//                    record.get("CVV")
-            );
-            procesoVuelo(List.of(vuelo));
-        }
+
+    @And("pago con tarjeta de credito tarjeta {string}, nombre y apellido {string}, expiracion {string} y CVV {string}")
+    public void pagoConTarjetaDeCreditoTarjetaNombreYApellidoExpiracionYCVV(String numberCard, String nameAndLast, String expiration, String cvv) {
+        vuelosDespegar.paymentCard(numberCard,nameAndLast,expiration,cvv);
+
+
+    }
+
+    @And("El origen del paquete es {string} y el destino es {string}")
+    public void elOrigenDelPaqueteEsYElDestinoEs(String origen, String destino) {
+        vuelosDespegar.ingresarPaquetes(origen,destino);
+
     }
 
 
-//    @DataTableType
-//    public List<Vuelo> defineVuelos(List<Map<String, String>> entries) {
-//        List<Vuelo> vuelos = new ArrayList<>();
-//        for (Map<String, String> entry : entries) {
-//            Vuelo vuelo = new Vuelo(
-//                    entry.get("Origen"),
-//                    entry.get("Destino"),
-//                    Double.parseDouble(entry.get("Precio_Ida")),
-//                    Double.parseDouble(entry.get("Precio_Vuelta"))
-////                    entry.get("Nombre"),
-////                    entry.get("Apellido"),
-////                    entry.get("Fecha_Nacimiento"),
-////                    entry.get("Documento"),
-////                    entry.get("Email"),
-////                    entry.get("Telefono"),
-////                    entry.get("Tarjeta"),
-////                    entry.get("Nombre_Apellido"),
-////                    entry.get("Expiracion"),
-////                    entry.get("CVV")
-//            );
-//            vuelos.add(vuelo);
-//        }
-//        return vuelos;
-//    }
+
 }

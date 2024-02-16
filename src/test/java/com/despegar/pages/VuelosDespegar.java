@@ -14,39 +14,51 @@ import java.util.Set;
 public class VuelosDespegar extends PageObject {
 
 
-    By BTN_ALOJAMIENTOS = By.xpath("//a[@product=\"HOTELS\"]");
-    By BTN_VUELOS = By.xpath("//button[@data-testid=\"id-tab-flight-tab\"]");
-    By BTN_PAQUETES = By.xpath("//a[@product=\"PACKAGES\"]");
-    By TXT_ORIGEN = By.xpath("//input[@id=\"txtInputOrigin_field\"]");
-    By BTN_AUTOCOMPLETE = By.xpath("//button[@id=\"btnItemAutoComplete_0\"]");
-    By TXT_DESTINO = By.xpath("//input[@id=\"txtInputDestination_field\"]");
-    By BTN_IDA_FECHA = By.xpath("(//input[@placeholder=\"Ida\"])[1]");
-    By BTN_IDA_VUELTA = By.xpath("(//input[@placeholder=\"Vuelta\"])[1]");
+    private final By BTN_VUELOS = By.xpath("//button[@data-testid=\"id-tab-flight-tab\"]");
+    private final By BTN_PAQUETES = By.xpath("//button[@id=\"id-tab-package\"]");
+    private final By TXT_ORIGEN = By.xpath("//input[@id=\"txtInputOrigin_field\"]");
+    private final By BTN_AUTOCOMPLETE = By.xpath("//button[@id=\"btnItemAutoComplete_0\"]");
+    private final By TXT_DESTINO = By.xpath("//input[@id=\"txtInputDestination_field\"]");
+    private final By BTN_BUSCAR = By.xpath("//button[@id=\"btnSearchCTA\"]");
 
-    By BTN_SELECCIONAR_POR_MES = By.xpath("(//span[contains(text(),'Selección por mes')])[1]");
-    By BTN_BUSCAR = By.xpath("//button[@id=\"btnSearchCTA\"]");
 
-    By BTN_ALL_MONTHS = By.xpath("(//span[contains(text(),'Febrero')]//ancestor::label/input)[1]");
-    By BTN_APLICAR = By.xpath("(//em[contains(text(),'Aplicar')]//ancestor::button)[1]");
 
-    By BTN_CLOSE_BANNER = By.xpath("//div[contains(@class,'login-incentive--button-close')]");
+    private final By BTN_TODAY = By.xpath("(//td[contains(@class,'CalendarDay') and @aria-disabled=\"false\"])[4]");
+    private final By BTN_NEXT = By.xpath("(//td[contains(@class,'CalendarDay') and @aria-disabled=\"false\"])[11]");
 
-    By BTN_TEST = By.xpath("//div[@class=\"sbox5-box-container--1Ro43\"]");
+    private final By BTN_SELECT_DATE = By.xpath("//input[@id=\"departureDate\"]");
 
-    By BTN_TODAY = By.xpath("(//td[contains(@class,'CalendarDay') and @aria-disabled=\"false\"])[4]");
-    By BTN_NEXT = By.xpath("(//td[contains(@class,'CalendarDay') and @aria-disabled=\"false\"])[11]");
-    By BTN_CLOSE_COOKIES = By.xpath("//em[contains(text(),'Entendí')]");
+    private final By FLIGHTS_IDA = By.xpath("//*[contains(@id,\"WrapperCardFlight\")]");
 
-    By BTN_SELECT_DATE = By.xpath("//input[@id=\"departureDate\"]");
+    private final By BTN_ELEGIR_ECONOMY = By.xpath("//div[@data-testid=\"flight-1-price-BASIC\"]//following-sibling::div/button");
+    private final By BTN_ACEPTAR_RESTRICCIONES = By.xpath("//span[contains(text(),'Aceptar restricciones')]//ancestor::button");
 
-    By FLIGHTS_IDA = By.xpath("//*[contains(@id,\"WrapperCardFlight\")]");
 
-    By BTN_ELEGIR_ECONOMY = By.xpath("//div[@data-testid=\"flight-1-price-BASIC\"]//following-sibling::div/button");
-    By BTN_ACEPTAR_RESTRICCIONES = By.xpath("//span[contains(text(),'Aceptar restricciones')]//ancestor::button");
+    private final By TXT_ORIGEN_PAQUETE = By.xpath("//input[@id=\"package-searchbox-origin-autocompleteinput\"]");
+    private final By TXT_DESTINO_PAQUETES = By.xpath("//input[@id=\"package-searchbox-destination-autocompleteinput\"]");
+
+    private final By BTN_SELECT_SEATS = By.xpath("//button[@data-testid=\"button9--button\"]");
+    private final By BTN_CONFIRM_SEATS = By.xpath("//button[@data-testid=\"btn-confirm-cart-section\"]");
+    private final By BTN_CHOOSE_LATER = By.xpath("//button[@data-testid=\"buttonChooseLater--button\"]");
+    private final By TXT_PERSONAL_ITEM = By.xpath("//input[@id=\"personal-item\"]");
+    private final By BTN_CONTINUE = By.xpath("//button[@data-testid=\"BAGS-continue-button\"]");
+    private final By BTN_CONFIRM_CART = By.xpath("//button[@data-testid=\"button-cart-confirm--button\"]");
+    private final By TXT_FIRST_NAME = By.xpath("//input[@data-testid=\"passengerDetails-firstName-ADT_1-textfield-input\"]");
+    private final By TXT_LAST_NAME = By.xpath("//input[@id=\"passengerDetails-lastName-ADT_1\"]");
+    private final By TXT_DATE_OF_BIRTH = By.xpath("//input[@id=\"passengerInfo-dateOfBirth-ADT_1\"]");
+    private final By TXT_DOCUMENT_NUMBER = By.xpath("//input[@id=\"documentInfo-documentNumber-ADT_1\"]");
+    private final By TXT_EMAIL = By.xpath("//input[@id=\"passengerInfo-emails-ADT_1\"]");
+    private final By TXT_PHONE_NUMBER = By.xpath("//input[@id=\"passengerInfo-phones0-number-ADT_1\"]");
+    private final By BTN_SUBMIT_PASSENGER_FORM = By.xpath("//button[@id=\"passengerFormSubmitButtonADT_1\"]");
+    private final By BTN_FINAL_PRICE = By.xpath("//button[@aria-describedby=\"final-price\"]");
+    private final By BTN_CREDIT_CARD = By.xpath("//span[@data-testid=\"new-credit-card-payment-method-radio-accordion-item--radio-styled\"]");
+    private final By TXT_CARD_NUMBER = By.xpath("//input[@data-testid=\"cardNumber--text-field\"]");
+    private final By TXT_CARD_HOLDER = By.xpath("//input[@data-testid=\"cardHolder--text-field\"]");
+    private final By TXT_EXPIRATION_DATE = By.xpath("//input[@data-testid=\"expirationDate--text-field\"]");
+    private final By TXT_CVV = By.xpath("//input[@data-testid=\"CVV--password__input--text-field\"]");
+
+
     public void enterToPage(String url){
-
-
-        //div[not(contains(@class,'-disabled'))]
         try {
             getDriver().get(url);
             getDriver().manage().window().maximize();
@@ -88,21 +100,25 @@ public class VuelosDespegar extends PageObject {
         find(BTN_AUTOCOMPLETE).click();
 
 
-
-//        try {
-//            Thread.sleep(2000);
-//        } catch (InterruptedException e) {
-//            throw new RuntimeException(e);
-//        }
-//
-//        find(BTN_BUSCAR).waitUntilEnabled().click();
-
-//        try {
-//            Thread.sleep(40000);
-//        } catch (InterruptedException e) {
-//            throw new RuntimeException(e);
-//        }
     }
+
+
+    public void ingresarPaquetes(String origen,String destino) {
+
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        find(TXT_ORIGEN_PAQUETE).typeAndTab(origen);
+        find(BTN_AUTOCOMPLETE).click();
+
+        find(TXT_DESTINO_PAQUETES).typeAndTab(destino);
+        find(BTN_AUTOCOMPLETE).click();
+
+
+    }
+
 
     public void cambiarAPestanaNueva() {
         WebDriver driver = getDriver();
@@ -117,7 +133,6 @@ public class VuelosDespegar extends PageObject {
         }
     }
     public void seleccionarFechas() {
-//        find(BTN_CLOSE_BANNER).click();
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
@@ -126,12 +141,9 @@ public class VuelosDespegar extends PageObject {
 
         find(BTN_SELECT_DATE).click();
 
-//
 
         find(BTN_TODAY).click();
         find(BTN_NEXT).click();
-//        find(BTN_APLICAR).click();
-//
 
         try {
             Thread.sleep(2000);
@@ -166,7 +178,6 @@ public class VuelosDespegar extends PageObject {
             precioStr = precioStr.replace(",", ".");
             precioStr = precioStr.replace(".", "");
 
-// Eliminar los dos últimos caracteres
             precioStr = precioStr.substring(0, precioStr.length() - 2);
             System.out.println(precioStr);
             Double price = Double.parseDouble(precioStr);
@@ -174,7 +185,6 @@ public class VuelosDespegar extends PageObject {
             vuelosConPrecios.put(id, price);
         }
 
-        System.out.println(vuelosConPrecios);
 
 
         Map<String, Double> vuelosMenores500k = new HashMap<>();
@@ -191,16 +201,10 @@ public class VuelosDespegar extends PageObject {
             }
         }
 
-        // Imprimir los vuelos con precios menores a 500,000
-        System.out.println("Vuelos con precios menores a 500,000:");
+
         for (Map.Entry<String, Double> entry : vuelosMenores500k.entrySet()) {
             System.out.println(entry.getKey() + ": " + entry.getValue());
         }
-
-        // Imprimir el vuelo más barato junto con su ID
-        System.out.println("Vuelo más barato:");
-        System.out.println("ID: " + idVueloMasBarato + ", Precio: " + precioMinimo);
-        System.out.println("lsksks");
 
         return idVueloMasBarato;
     }
@@ -221,51 +225,48 @@ public class VuelosDespegar extends PageObject {
         }
     }
 
-    public void seats() {
-        find(By.xpath("//button[@data-testid=\"button9--button\"]")).click();
-        find(By.xpath("//button[@data-testid=\"btn-confirm-cart-section\"]")).click();
-        find(By.xpath("//button[@data-testid=\"btn-confirm-cart-section\"]")).click();
-        find(By.xpath("//button[@data-testid=\"btn-confirm-cart-section\"]")).click();
-        find(By.xpath("//button[@data-testid=\"buttonChooseLater--button\"]")).click();
+    public void selectSeats() {
+        find(BTN_SELECT_SEATS).click();
+        find(BTN_CONFIRM_SEATS).click();
+        find(BTN_CONFIRM_SEATS).click();
+        find(BTN_CONFIRM_SEATS).click();
+        find(BTN_CHOOSE_LATER).click();
     }
 
     public void equipaje() {
-        find(By.xpath("//input[@id=\"personal-item\"]")).click();
-        find(By.xpath("//button[@id=\"tabSegment-1\"]")).click();
-        find(By.xpath("//input[@id=\"personal-item\"]")).click();
+        find(TXT_PERSONAL_ITEM).click();
+        find(BTN_CONTINUE).click();
+        find(TXT_PERSONAL_ITEM).click();
         try {
             Thread.sleep(5000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        find(By.xpath("//button[@data-testid=\"BAGS-continue-button\"]")).click();
-        find(By.xpath("//button[@data-testid=\"button-cart-confirm--button\"]")).click();
-
+        find(BTN_CONTINUE).click();
+        find(BTN_CONFIRM_CART).click();
     }
 
     public void informationPasenger(String nombre, String apellido, String fecha, String documento, String email, String telefono) {
-        find(By.xpath("//input[@data-testid=\"passengerDetails-firstName-ADT_1-textfield-input\"]")).type(nombre);
-        find(By.xpath("//input[@id=\"passengerDetails-lastName-ADT_1\"]")).type(apellido);
-        find(By.xpath("//input[@id=\"passengerInfo-dateOfBirth-ADT_1\"]")).type(fecha);
-        find(By.xpath("//input[@id=\"documentInfo-documentNumber-ADT_1\"]")).type(documento);
-        find(By.xpath("//input[@id=\"passengerInfo-emails-ADT_1\"]")).type(email);
-        find(By.xpath("//input[@id=\"passengerInfo-phones0-number-ADT_1\"]")).type(telefono);
-        find(By.xpath("//button[@id=\"passengerFormSubmitButtonADT_1\"]")).click();
+        find(TXT_FIRST_NAME).type(nombre);
+        find(TXT_LAST_NAME).type(apellido);
+        find(TXT_DATE_OF_BIRTH).type(fecha);
+        find(TXT_DOCUMENT_NUMBER).type(documento);
+        find(TXT_EMAIL).type(email);
+        find(TXT_PHONE_NUMBER).type(telefono);
+        find(BTN_SUBMIT_PASSENGER_FORM).click();
         try {
             Thread.sleep(5000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        find(By.xpath("//button[@aria-describedby=\"final-price\"]")).click();
-
+        find(BTN_FINAL_PRICE).click();
     }
 
-    public void paymetCard(String numberCard,String nameAndLast,String expiration,String cvv){
-        find(By.xpath("//span[@data-testid=\"new-credit-card-payment-method-radio-accordion-item--radio-styled\"]")).click();
-        find(By.xpath("//input[@data-testid=\"cardNumber--text-field\"]")).type(numberCard);
-        find(By.xpath("//input[@data-testid=\"cardHolder--text-field\"]")).type(nameAndLast);
-        find(By.xpath("//input[@data-testid=\"expirationDate--text-field\"]")).type(expiration);
-        find(By.xpath("//input[@data-testid=\"CVV--password__input--text-field\"]")).type(cvv);
-
+    public void paymentCard(String numberCard, String nameAndLast, String expiration, String cvv){
+        find(BTN_CREDIT_CARD).click();
+        find(TXT_CARD_NUMBER).type(numberCard);
+        find(TXT_CARD_HOLDER).type(nameAndLast);
+        find(TXT_EXPIRATION_DATE).type(expiration);
+        find(TXT_CVV).type(cvv);
     }
 }
